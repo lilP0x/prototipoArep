@@ -25,14 +25,36 @@ public class PromptBuilder {
                     horario = e.getStartTime().format(timeFormatter) + " a " + e.getEndTime().format(timeFormatter);
                 }
                 prompt.append("  • ").append(e.getTitle())
-                      .append(" de ").append(horario).append("\n");
+                        .append(" de ").append(horario).append("\n");
             }
         });
 
-        prompt.append("\nPor favor, analiza estos datos y dime:\n")
-              .append("1. ¿Cuánto tiempo tengo libre por día?\n")
-              .append("2. ¿En qué actividades gasto más tiempo?\n")
-              .append("3. ¿Qué cambios me recomiendas para mejorar mi productividad?\n");
+        prompt.append("\nPor favor, analiza estos datos y responde exclusivamente en el siguiente formato JSON:\n")
+        .append("{\n")
+        .append("  \"daily\": {\n")
+        .append("    \"YYYY-MM-DD\": {\n")
+        .append("      \"actividades\": {\n")
+        .append("        \"reuniones\": 0.0, // porcentaje sobre 24h\n")
+        .append("        \"trabajo\": 0.0,\n")
+        .append("        \"ocio\": 0.0,\n")
+        .append("        \"descanso\": 0.0,\n")
+        .append("        \"estudio\": 0.0\n")
+        .append("    \"deporte\": 0.0\n")
+        .append("      },\n")
+        .append("      \"recomendacion\": \"...\"\n")
+        .append("    }\n")
+        .append("  },\n")
+        .append("  \"weekly\": {\n")
+        .append("    \"reuniones\": 0.0, // porcentaje sobre 168h\n")
+        .append("    \"trabajo\": 0.0,\n")
+        .append("    \"ocio\": 0.0,\n")
+        .append("    \"descanso\": 0.0,\n")
+        .append("    \"estudio\": 0.0\n")
+        .append("    \"deporte\": 0.0\n")
+        .append("  }\n")
+        .append("}\n")
+        .append("Importante: Los valores deben estar expresados como porcentajes decimales (por ejemplo: 12.5 representa 12.5%). No uses horas. No incluyas explicaciones, texto adicional ni comentarios fuera del JSON.");
+
 
         return prompt.toString();
     }

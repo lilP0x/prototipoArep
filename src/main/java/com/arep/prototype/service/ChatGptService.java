@@ -15,7 +15,7 @@ import java.util.List;
 @Service
 public class ChatGptService {
 
-    private final String KEY = "Reemplazala aqui idiota"; // Reemplaza con tu clave
+    private final String KEY = ""; // Reemplaza con tu clave
     private final String API_URL = "https://api.openai.com/v1/chat/completions";
 
     public String analizarAgenda(List<CalendarEventDTO> eventos) {
